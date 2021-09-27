@@ -21,7 +21,20 @@ public class RocketControl : MonoBehaviour
     {
         // LeftRocket.GetComponent<Physics2D>();
         //rb2D = gameObject.AddComponent<Rigidbody2D>();
-        rb2D.AddForce(transform.up * 0.001f);
-        rb2D2.AddForce(transform.up * 0.001f);
+
+ 
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Debug.Log("A Pressed");
+            rb2D.AddForce(transform.up * 0.001f, ForceMode2D.Impulse);
+            
+        }
+
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            Debug.Log("D Pressed");
+            rb2D2.AddForce(transform.up * 0.001f, ForceMode2D.Impulse);
+        }
     }
 }
