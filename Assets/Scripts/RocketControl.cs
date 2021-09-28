@@ -10,6 +10,8 @@ public class RocketControl : MonoBehaviour
     public Rigidbody2D rb2D2;
     public float ThrustersForce;
     public float ThrustersForceIndividual;
+    public ParticleSystem ps1;
+    public ParticleSystem ps2;
     //public GameObject LeftRocket;
     // public GameObject RightRocket;
     // Start is called before the first frame update
@@ -25,6 +27,8 @@ public class RocketControl : MonoBehaviour
         //        new ParticleSystem.Burst(2.0f, 100),
         //        new ParticleSystem.Burst(4.0f, 100)
         //    });
+
+        //ps1 = GetComponent<ParticleSystem>();
 
     }
 
@@ -55,6 +59,8 @@ public class RocketControl : MonoBehaviour
         {
             rb2D.AddRelativeForce(transform.up * ThrustersForce, ForceMode2D.Impulse);
             rb2D2.AddRelativeForce(transform.up * ThrustersForce, ForceMode2D.Impulse);
+            ps1.Play();
+            ps2.Play();
         }
     }
 }
