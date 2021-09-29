@@ -12015,8 +12015,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2f47dfb3f787f4e82def76b9baa95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RestartButton: {fileID: 0}
-  WonText: {fileID: 0}
+  RestartButton: {fileID: 698695953}
+  WonText: {fileID: 2026778295}
 --- !u!1 &2026778293
 GameObject:
   m_ObjectHideFlags: 0
