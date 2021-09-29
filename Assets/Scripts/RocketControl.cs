@@ -12,11 +12,34 @@ public class RocketControl : MonoBehaviour
     public float ThrustersForceIndividual;
     public ParticleSystem ps1;
     public ParticleSystem ps2;
+    AudioSource Audio;
+    public AudioClip AudioClip;
+    public int samplerate = 44100;
+    public float frequency = 440;
+    public int position = 0;
     //public GameObject LeftRocket;
     // public GameObject RightRocket;
+
+
+    void OnAudioRead(float[] data)
+    {
+        int count = 0;
+        while (count < data.Length)
+        {
+            data[count] = Mathf.Sin(2 * Mathf.PI * frequency * position / samplerate);
+            position++;
+            count++;
+        }
+    }
+
+    void OnAudioSetPosition(int newPosition)
+    {
+        position = newPosition;
+    }
     // Start is called before the first frame update
     void Start()
     {
+
         //ParticleSystem PS = GetComponent<ParticleSystem>();
         //var em = PS.emission;
         //em.enabled = true;
@@ -30,6 +53,10 @@ public class RocketControl : MonoBehaviour
 
         //ps1 = GetComponent<ParticleSystem>();
 
+        AudioClip = AudioClip.Create("RocketBoosters", samplerate * 2, 1, samplerate, true, OnAudioRead, OnAudioSetPosition);
+        Audio = GetComponent<AudioSource>();
+        Audio.clip = AudioClip;
+        
     }
 
     // Update is called once per frame
@@ -44,6 +71,8 @@ public class RocketControl : MonoBehaviour
         {
             Debug.Log("A Pressed");
             //rb2D.AddForce(transform.up * ThrustersForce, ForceMode2D.Impulse);
+            ps1.Play();
+            Audio.Play();
             rb2D.AddRelativeForce(transform.up * ThrustersForceIndividual, ForceMode2D.Impulse);
 
         }
@@ -52,6 +81,8 @@ public class RocketControl : MonoBehaviour
         {
             Debug.Log("D Pressed");
             //rb2D2.AddForce(transform.up * ThrustersForce, ForceMode2D.Impulse);
+            ps2.Play();
+            Audio.Play();
             rb2D2.AddRelativeForce(transform.up * ThrustersForceIndividual, ForceMode2D.Impulse);
         }
 
@@ -61,6 +92,7 @@ public class RocketControl : MonoBehaviour
             rb2D2.AddRelativeForce(transform.up * ThrustersForce, ForceMode2D.Impulse);
             ps1.Play();
             ps2.Play();
+            Audio.Play();
         }
     }
 }
